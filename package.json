@@ -4,7 +4,7 @@
   "description": "Example for using continuous integration with Truffle",
   "main": "truffle-config.js",
   "scripts": {
-    "test": "npx truffle test"
+    "test": "bash ./scripts/run_tests.sh"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/gorgos/Truffle-CI-Example/issues"
   },
-  "homepage": "https://github.com/gorgos/Truffle-CI-Example#readme"
+  "homepage": "https://github.com/gorgos/Truffle-CI-Example#readme",
+  "dependencies": {
+    "ganache-cli": "^6.9.1",
+    "truffle": "^5.1.27"
+  }
 }
