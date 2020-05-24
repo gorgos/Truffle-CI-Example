@@ -1,0 +1,19 @@
+{
+  "name": "truffle-ci-example",
+  "version": "1.0.0",
+  "description": "Example for using continuous integration with Truffle",
+  "main": "truffle-config.js",
+  "scripts": {
+    "test": "npx truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gorgos/Truffle-CI-Example.git"
+  },
+  "author": "Markus Waas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gorgos/Truffle-CI-Example/issues"
+  },
+  "homepage": "https://github.com/gorgos/Truffle-CI-Example#readme"
+}
