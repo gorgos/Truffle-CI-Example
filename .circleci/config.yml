@@ -1,17 +1,56 @@
-version: 2.1
-orbs:
-  node: circleci/node@1.1.6
+version: 2
+# 2.1 does not yet support local run
+# unless with workaround. For simplicity just use it.
+# https://github.com/CircleCI-Public/circleci-cli/issues/79
+
+aliases:
+  - &defaults
+    docker:
+      - image: circleci/node:10
+
+  - &cache_key_node_modules
+    key: v1-node_modules-{{ checksum "package-lock.json" }}
+
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  dependencies:
+    <<: *defaults
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
+      - restore_cache:
+          <<: *cache_key_node_modules
+      - run:
+          name: Install npm dependencies and prepare
+          command: |
+            if [ ! -d node_modules ]; then
+              npm ci
+            else
+              npm run prepare
+            fi
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - build
+      - save_cache:
+          paths:
+            - node_modules
+          <<: *cache_key_node_modules
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Unit tests
+          command: npm run test
+
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  version: 2
+  everything:
+    jobs:
+      - dependencies
+      - test:
+          requires:
+            - dependencies
