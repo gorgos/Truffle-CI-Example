@@ -4,6 +4,7 @@
   "description": "Example for using continuous integration with Truffle",
   "main": "truffle-config.js",
   "scripts": {
+    "prepare": "npx truffle compile",
     "test": "bash ./scripts/run_tests.sh"
   },
   "repository": {
