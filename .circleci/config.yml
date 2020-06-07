@@ -49,7 +49,7 @@ jobs:
           at: .
       - run:
           name: Unit tests with coverage report
-          command: CONTINUOUS_INTEGRATION=true npm test
+          command: SOLIDITY_COVERAGE=true CONTINUOUS_INTEGRATION=true npm test
 
 workflows:
   version: 2

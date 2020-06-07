@@ -9,4 +9,4 @@ before_script:
 
 script:
   - npm test
-  - CONTINUOUS_INTEGRATION=true npm test
+  - SOLIDITY_COVERAGE=true CONTINUOUS_INTEGRATION=true npm test
