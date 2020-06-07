@@ -32,25 +32,12 @@ start_ganache() {
   echo "Ganache launched!"
 }
 
-if [ "$SOLIDITY_COVERAGE" != true ]; then
-  if ganache_running; then
-    echo "Using existing ganache instance"
-  else
-    echo "Starting our own ganache instance"
-    start_ganache
-  fi
+if ganache_running; then
+  echo "Using existing ganache instance"
 else
-  echo "Using ganache-cli from coverage"
+  echo "Starting our own ganache instance"
+  start_ganache
 fi
 
 npx truffle version
-
-if [ "$SOLIDITY_COVERAGE" = true ]; then
-  npx truffle run coverage
-
-  if [ "$CONTINUOUS_INTEGRATION" = true ]; then
-    cat coverage/lcov.info | npx coveralls
-  fi
-else
-  npx truffle test "$@"
-fi
+npx truffle test "$@"
