@@ -9,4 +9,5 @@ before_script:
 
 script:
   - npm test
-  - CONTINUOUS_INTEGRATION=true npm test
+  - npx truffle run coverage
+  - cat coverage/lcov.info | npx coveralls

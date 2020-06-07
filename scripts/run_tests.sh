@@ -13,11 +13,7 @@ cleanup() {
   fi
 }
 
-if [ "$SOLIDITY_COVERAGE" = true ]; then
-  ganache_port=8555
-else
-  ganache_port=8545
-fi
+ganache_port=8545
 
 ganache_running() {
   nc -z localhost "$ganache_port"
@@ -44,13 +40,4 @@ else
 fi
 
 npx truffle version
-
-if [ "$SOLIDITY_COVERAGE" = true ]; then
-  npx truffle run coverage
-
-  if [ "$CONTINUOUS_INTEGRATION" = true ]; then
-    cat coverage/lcov.info | npx coveralls
-  fi
-else
-  npx truffle test "$@"
-fi
+npx truffle test "$@"
