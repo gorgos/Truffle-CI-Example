@@ -41,6 +41,16 @@ jobs:
           name: Unit tests
           command: npm test
 
+  coverage:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Unit tests with coverage report
+          command: CONTINUOUS_INTEGRATION=true npm test
+
 workflows:
   version: 2
   everything:
