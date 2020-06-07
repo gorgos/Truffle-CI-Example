@@ -43,15 +43,10 @@ else
   start_ganache
 fi
 
-if [ "$SOLC_NIGHTLY" = true ]; then
-  echo "Downloading solc nightly"
-  wget -q https://raw.githubusercontent.com/ethereum/solc-bin/gh-pages/bin/soljson-nightly.js -O /tmp/soljson.js && find . -name soljson.js -exec cp /tmp/soljson.js {} \;
-fi
-
-truffle version
+npx truffle version
 
 if [ "$SOLIDITY_COVERAGE" = true ]; then
-  npx solidity-coverage
+  npx truffle run coverage
 
   if [ "$CONTINUOUS_INTEGRATION" = true ]; then
     cat coverage/lcov.info | npx coveralls
