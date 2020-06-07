@@ -9,5 +9,6 @@ before_script:
 
 script:
   - npm test
+  - npx codechecks
   - npx truffle run coverage
   - cat coverage/lcov.info | npx coveralls
