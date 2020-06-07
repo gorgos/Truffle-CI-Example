@@ -9,3 +9,4 @@ before_script:
 
 script:
   - npm test
+  - CONTINUOUS_INTEGRATION=true npm test
