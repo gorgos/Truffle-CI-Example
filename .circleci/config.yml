@@ -39,7 +39,7 @@ jobs:
           at: .
       - run:
           name: Unit tests
-          command: npm test
+          command: npm test && npx codechecks
 
   coverage:
     <<: *defaults

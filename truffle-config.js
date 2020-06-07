@@ -11,5 +11,11 @@ module.exports = {
       network_id: "*"
     }
   },
+  mocha: {
+    reporter: 'eth-gas-reporter',
+    reporterOptions: {
+      excludeContracts: ['Migrations']
+    }
+  },
   plugins: ["solidity-coverage"]
 };
