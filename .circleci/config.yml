@@ -1,7 +1,4 @@
 version: 2
-# 2.1 does not yet support local run
-# unless with workaround. For simplicity just use it.
-# https://github.com/CircleCI-Public/circleci-cli/issues/79
 
 aliases:
   - &defaults
@@ -19,12 +16,10 @@ jobs:
       - restore_cache:
           <<: *cache_key_node_modules
       - run:
-          name: Install npm dependencies and prepare
+          name: Install npm dependencies
           command: |
             if [ ! -d node_modules ]; then
               npm ci
-            else
-              npm run prepare
             fi
       - persist_to_workspace:
           root: .
@@ -44,7 +39,7 @@ jobs:
           at: .
       - run:
           name: Unit tests
-          command: npm run test
+          command: npm test
 
 workflows:
   version: 2
