@@ -13,11 +13,7 @@ cleanup() {
   fi
 }
 
-if [ "$SOLIDITY_COVERAGE" = true ]; then
-  ganache_port=8555
-else
-  ganache_port=8545
-fi
+ganache_port=8545
 
 ganache_running() {
   nc -z localhost "$ganache_port"
@@ -36,11 +32,15 @@ start_ganache() {
   echo "Ganache launched!"
 }
 
-if ganache_running; then
-  echo "Using existing ganache instance"
+if [ "$SOLIDITY_COVERAGE" != true ]; then
+  if ganache_running; then
+    echo "Using existing ganache instance"
+  else
+    echo "Starting our own ganache instance"
+    start_ganache
+  fi
 else
-  echo "Starting our own ganache instance"
-  start_ganache
+  echo "Using ganache-cli from coverage"
 fi
 
 npx truffle version
